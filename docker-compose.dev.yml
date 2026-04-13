@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: funkidz_db_dev
+    environment:
+      POSTGRES_DB: funkidz_db
+      POSTGRES_USER: funkidz_user
+      POSTGRES_PASSWORD: funkidz_password
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      context: ./backend
+    container_name: funkidz_backend_dev
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      DEBUG: "True"
+    depends_on:
+      - db
+
+  frontend:
+    image: node:20-alpine
+    container_name: funkidz_frontend_dev
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev -- --host"
+    environment:
+      VITE_API_URL: http://localhost:8000/api/
