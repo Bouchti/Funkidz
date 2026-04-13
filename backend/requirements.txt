@@ -1,8 +1,13 @@
-Django>=5.0,<6.0
-django-environ
+django>=4.2,<5.0
+djangorestframework
+djangorestframework-simplejwt
 django-cors-headers
+django-environ
 psycopg2-binary
+stripe
+Pillow
+celery
+redis
+drf-spectacular
 gunicorn
 whitenoise
-stripe
-redis
