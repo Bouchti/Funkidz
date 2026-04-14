@@ -171,3 +171,7 @@ dist-ssr/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Local scratch / archived frontend copy (not part of the app)
+scratch/
+frontend/src_archive/

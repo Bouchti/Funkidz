@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     # Third party apps
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'drf_spectacular',
 
@@ -66,7 +67,7 @@ ROOT_URLCONF = 'funkidz.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -146,6 +147,10 @@ SIMPLE_JWT = {
 
 # CORS Settings
 CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[])
+
+# Frontend (Stripe redirects, email links)
+FRONTEND_URL = env('FRONTEND_URL', default='http://localhost:3000')
+ADMIN_REGISTRATION_KEY = env('ADMIN_REGISTRATION_KEY', default='')
 
 # Stripe Settings
 STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY', default='')

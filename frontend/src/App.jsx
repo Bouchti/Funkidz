@@ -1,121 +1,105 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import { Header } from '@/app/components/layout/Header';
+import { Footer } from '@/app/components/layout/Footer';
+import { HomePage } from '@/app/pages/HomePage';
+import { ServicesPage } from '@/app/pages/ServicesPage';
+import { ServiceDetailsPage } from '@/app/pages/ServiceDetailsPage';
+import { GalleryPage } from '@/app/pages/GalleryPage';
+import { ContactPage } from '@/app/pages/ContactPage';
+import { LoginPage } from '@/app/pages/LoginPage';
+import { ForgotPasswordPage } from '@/app/pages/ForgotPasswordPage';
+import { BookingPage } from '@/pages/BookingPage';
+import { MyBookingsPage } from '@/pages/client/MyBookingsPage';
+import { BookingDetailPage } from '@/pages/client/BookingDetailPage';
+import { PaymentPage } from '@/pages/PaymentPage';
+import { PaymentSuccessPage } from '@/pages/PaymentSuccessPage';
+import { AdminLayout } from '@/pages/admin/AdminLayout';
+import { AdminDashboardPage } from '@/pages/admin/AdminDashboardPage';
+import { AdminBookingsPage } from '@/pages/admin/AdminBookingsPage';
+import { AdminBookingDetailPage } from '@/pages/admin/AdminBookingDetailPage';
+import { AdminServicesPage } from '@/pages/admin/AdminServicesPage';
+import { AdminOptionsPage } from '@/pages/admin/AdminOptionsPage';
+import { AdminGalleryPage } from '@/pages/admin/AdminGalleryPage';
+import { AdminAnimateursPage } from '@/pages/admin/AdminAnimateursPage';
+import { AnimateurLayout } from '@/pages/animateur/AnimateurLayout';
+import { AnimateurDashboardPage } from '@/pages/animateur/AnimateurDashboardPage';
+import { PlanningPage } from '@/pages/animateur/PlanningPage';
+import { MissionsPage } from '@/pages/animateur/MissionsPage';
+import { AvailabilityPage } from '@/pages/animateur/AvailabilityPage';
+import { PrivateRoute, AdminRoute, AnimateurRoute } from '@/utils/routes';
+import { TermsPage } from '@/pages/TermsPage';
+import { PrivacyPage } from '@/pages/PrivacyPage';
+import { AboutPage } from '@/pages/AboutPage';
+import { NotFoundPage } from '@/pages/NotFoundPage';
+import { RegisterPage } from '@/pages/RegisterPage';
+import { ResetPasswordPage } from '@/pages/ResetPasswordPage';
+import { PaymentCancelPage } from '@/pages/PaymentCancelPage';
+import { CookieBanner } from '@/components/ui/CookieBanner';
 
-function App() {
-  const [count, setCount] = useState(0)
+const PublicLayout = () => (
+  <div className="flex min-h-screen flex-col">
+    <Header />
+    <main className="flex-grow">
+      <Outlet />
+    </main>
+    <Footer />
+    <CookieBanner />
+  </div>
+);
 
+export default function App() {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <Router>
+      <Routes>
+        <Route element={<PublicLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/services/:id" element={<ServiceDetailsPage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/signup" element={<Navigate to="/register" replace />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+          <Route path="/termes" element={<TermsPage />} />
+          <Route path="/rgpd" element={<PrivacyPage />} />
+          <Route path="/a-propos" element={<AboutPage />} />
 
-      <div className="ticks"></div>
+          <Route element={<PrivateRoute />}>
+            <Route path="/reservation" element={<BookingPage />} />
+            <Route path="/mes-reservations" element={<MyBookingsPage />} />
+            <Route path="/reservations/:id" element={<BookingDetailPage />} />
+            <Route path="/payment/:bookingId" element={<PaymentPage />} />
+            <Route path="/payment/success" element={<PaymentSuccessPage />} />
+            <Route path="/payment/cancel" element={<PaymentCancelPage />} />
+          </Route>
+        </Route>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <Route element={<AdminRoute />}>
+          <Route element={<AdminLayout />}>
+            <Route path="/admin" element={<AdminDashboardPage />} />
+            <Route path="/admin/reservations" element={<AdminBookingsPage />} />
+            <Route path="/admin/reservations/:id" element={<AdminBookingDetailPage />} />
+            <Route path="/admin/services" element={<AdminServicesPage />} />
+            <Route path="/admin/options" element={<AdminOptionsPage />} />
+            <Route path="/admin/galerie" element={<AdminGalleryPage />} />
+            <Route path="/admin/animateurs" element={<AdminAnimateursPage />} />
+          </Route>
+        </Route>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <Route element={<AnimateurRoute />}>
+          <Route element={<AnimateurLayout />}>
+            <Route path="/animateur" element={<AnimateurDashboardPage />} />
+            <Route path="/animateur/planning" element={<PlanningPage />} />
+            <Route path="/animateur/missions" element={<MissionsPage />} />
+            <Route path="/animateur/disponibilites" element={<AvailabilityPage />} />
+          </Route>
+        </Route>
+
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </Router>
+  );
 }
-
-export default App

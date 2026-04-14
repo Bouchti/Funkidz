@@ -1,0 +1,8 @@
+/* App font stack — add @font-face rules here when you ship custom files. */
+@layer base {
+  html {
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    text-rendering: optimizeLegibility;
+  }
+}

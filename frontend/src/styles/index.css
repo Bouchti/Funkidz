@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@import './fonts.css';
+@import './theme.css';
+
+@theme {
+  --fun-orange: #FF8A00;
+  --fun-orange-light: #FFF4E5;
+  --fun-pink: #FF008A;
+  --fun-pink-light: #FFE5F4;
+  --fun-purple: #8A00FF;
+  --fun-purple-light: #F4E5FF;
+  --fun-blue: #3A86FF;
+  --fun-yellow: #FFD600;
+  --fun-light-bg: #F9F9FF;
+}
+
+@layer base {
+  :root {
+    --fun-orange: #FF8A00;
+    --fun-orange-light: #FFF4E5;
+    --fun-pink: #FF008A;
+    --fun-pink-light: #FFE5F4;
+    --fun-purple: #8A00FF;
+    --fun-purple-light: #F4E5FF;
+    --fun-blue: #3A86FF;
+    --fun-yellow: #FFD600;
+    --fun-light-bg: #F9F9FF;
+  }
+}

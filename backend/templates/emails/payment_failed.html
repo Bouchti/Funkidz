@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px; }
+        .header { background: #ffa502; color: white; padding: 20px; text-align: center; border-radius: 10px 10px 0 0; }
+        .content { padding: 20px; }
+        .footer { text-align: center; font-size: 12px; color: #777; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Échec du paiement</h1>
+        </div>
+        <div class="content">
+            <p>Bonjour {{ booking.user.email }},</p>
+            <p>Malheureusement, le paiement pour votre réservation <strong>#{{ booking.booking_number }}</strong> a échoué.</p>
+            <p>Merci de réessayer ou de nous contacter pour résoudre ce problème.</p>
+        </div>
+        <div class="footer">
+            &copy; 2026 Funkidz. Tous droits réservés.
+        </div>
+    </div>
+</body>
+</html>
